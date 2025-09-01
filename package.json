@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "tinacms build && next build",
+    "build": "tinacms build && next build && node scripts/fix-admin-paths.js",
     "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev --turbo\"",
     "start": "next start",
     "postinstall": "fumadocs-mdx"

@@ -7,6 +7,10 @@ const branch =
   process.env.HEAD ||
   "main";
 
+// Determine if we're in production and need the basePath
+const isProduction = process.env.NODE_ENV === 'production';
+const basePath = isProduction ? 'my-docs' : '';
+
 export default defineConfig({
   branch,
 
@@ -18,6 +22,14 @@ export default defineConfig({
   build: {
     outputFolder: "admin",
     publicFolder: "public",
+    basePath: basePath,
+  },
+  cmsCallback: (cms) => {
+    // GitHub Pages subfolder configuration
+    if (isProduction) {
+      cms.flags.set("branch-switcher", false);
+    }
+    return cms;
   },
   media: {
     tina: {
